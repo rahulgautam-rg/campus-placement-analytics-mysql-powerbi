@@ -1,0 +1,35 @@
+/* All Power BI measure created overview*/
+
+Applied Candidates = 
+DISTINCTCOUNT('placementdb applications'[candidate_id])
+
+Eligibility Rate = 
+DIVIDE(
+    [Eligible Candidates],
+    [Total Enrolled]
+)
+
+Eligible Candidates = 
+COUNTROWS('placementdb candidates')
+
+Placed Candidates = 
+CALCULATE(
+    DISTINCTCOUNT('placementdb applications'[candidate_id]),
+    'placementdb applications'[application_status]   
+    = "Approved by client"
+)
+
+Placement Rate = 
+DIVIDE(
+    [Placed Candidates],
+    [Applied Candidates]
+)
+
+Total Applications = 
+COUNTROWS('placementdb applications')
+
+Total Enrolled = 
+COUNTROWS('placementdb enrolments')
+
+Total Interviews = 
+COUNTROWS('placementdb interviews')
